@@ -1,0 +1,91 @@
+.homeTab {
+    .cards {
+        display: flex;
+        gap: 1.2rem;
+
+        .itemCard {
+            flex: 1;
+            border-radius: 2.4rem;
+            background: radial-gradient(circle, #5a5a5a, black);
+            padding: 2.2rem;
+            color: white;
+
+            .money {
+                font-weight: bold;
+                margin-bottom: 1.2rem;
+                font-size: 2.8rem;
+            }
+
+            .label {
+                font-size: 1.6rem;
+            }
+        }
+    }
+
+    .bills {
+        margin-top: 2.4rem;
+
+        .par {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2.4rem;
+
+            span {
+                color: white;
+                font-size: 1.8rem;
+            }
+
+            .title {
+                font-size: 2.2rem;
+            }
+        }
+    }
+
+    .listBill {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    .friends {
+        position: relative;
+        padding: 1.2rem;
+        background-color: #fff8ee;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        left: 0;
+        max-height: 30vh;
+        transition: 0.5s;
+
+        &.show {
+            max-height: 50vh;
+        }
+
+        border-top-right-radius: 2.4rem;
+        border-top-left-radius: 2.4rem;
+
+        .titleUser {
+            margin-bottom: 1.2rem;
+        }
+
+        .btnUpMore {
+            position: absolute;
+            top: -2rem;
+            right: 50%;
+            transform: translateX(50%);
+            border: none;
+            padding: 2rem;
+            border-radius: 50%;
+        }
+
+        p {
+            font-size: 1.8rem;
+            font-weight: 500;
+
+            &:first-child {
+                margin-bottom: 1.2rem;
+            }
+        }
+    }
+}

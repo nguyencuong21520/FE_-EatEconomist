@@ -1,0 +1,88 @@
+.bill {
+    background-color: white;
+    border-radius: 2.4rem;
+    padding: 1.2rem;
+
+    .overviewBill {
+        display: flex;
+        align-items: center;
+
+        .content {
+            margin-left: 1.2rem;
+        }
+
+        .title {
+            font-size: 2.4rem;
+        }
+
+        .date {
+            opacity: 0.5;
+        }
+
+        .img {
+            img {
+                width: 5rem;
+                border-radius: 50%;
+            }
+        }
+
+        .totalMustPay {
+            margin-left: auto;
+            font-size: 2.4rem;
+            font-weight: 600;
+        }
+
+        margin-bottom: 1.2rem;
+    }
+
+    .infoUserEnrolled {
+        display: flex;
+        gap: 2.4rem;
+        margin-top: 1.2rem;
+        align-items: center;
+
+        img {
+            width: 5rem;
+            border-radius: 50%;
+        }
+
+        .usersEnrolled {
+            flex: 0.2;
+            max-width: 20%;
+        }
+
+        .statusPurchase {
+            padding: 1.2rem;
+
+            &.paid {
+                background-color: #ceffd0;
+
+                .money {
+                    color: #48f74e;
+                }
+            }
+
+            &.owed {
+                background-color: #ffe1e1;
+
+                .money {
+                    color: #f66060;
+                }
+            }
+
+            border-radius: 2.8rem;
+            flex: 1;
+            text-align: right;
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+
+            span {
+                &.money {
+                    font-size: 2.4rem;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}

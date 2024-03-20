@@ -1,0 +1,14 @@
+.titleDrawer {
+    display: flex;
+    align-items: center;
+
+    span {
+        font-size: 1.8rem;
+    }
+
+    img {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+    }
+}

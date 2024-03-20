@@ -1,0 +1,39 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+
+    div.logo {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+
+        h1 {
+            color: white;
+            font-size: 3.2rem;
+            font-weight: 500;
+        }
+    }
+
+    div.imgLogo {
+        background-color: white;
+        border-radius: 50%;
+        width: 5rem;
+        height: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .iconLogo {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    div.user img {
+        width: 5rem;
+        height: 5rem;
+        background-color: white;
+        border-radius: 50%;
+    }
+}
