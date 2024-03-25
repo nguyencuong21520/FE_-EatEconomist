@@ -8,6 +8,8 @@ import ProviderStore from '../store/ProviderStore';
 import Drawer from './Components/Drawer';
 import Modal from './Components/Modal';
 import ResetPassword from './Pages/auth/reset-password';
+import ListOrder from './Pages/list-order';
+import PersonalInformation from './Components/PersonalInformation';
 
 const CombineRouter = () => {
     return (
@@ -16,6 +18,8 @@ const CombineRouter = () => {
                 <Routes>
                     <Route path='/' element={<MainLayout />}>
                         <Route path='home' element={<Home />} />
+                        <Route path='list-order' element={<ListOrder />} />
+                        <Route path='personal-information' element={<PersonalInformation />} />
                     </Route>
                     <Route path='auth' element={<AuthLayout />}>
                         <Route path='login' element={<Login />} />
@@ -24,9 +28,9 @@ const CombineRouter = () => {
                     </Route>
                     <Route path='*' element={<div>Không hợp lệ</div>} />
                 </Routes>
+                <Drawer />
+                <Modal />
             </BrowserRouter>
-            <Drawer />
-            <Modal />
         </ProviderStore>
     )
 }

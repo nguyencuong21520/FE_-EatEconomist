@@ -1,26 +1,38 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Order from '../Icons/Order';
 import User from '../Icons/User';
-import Logout from '../Icons/Logout';
 import { StoreContext } from '../../../store/ProviderStore';
+import Logout from '../Icons/Logout';
 import './styles.scss';
 
 const Setting = () => {
     const store = useContext(StoreContext);
+    const nav = useNavigate();
     const listSetting = [
         {
             label: "Thông tin cá nhân",
-            icon: <User className="icon" />
+            icon: <User className="icon" />,
+            onClick() {
+                nav('/personal-information');
+                store.drawer.handleDrawer({
+                    ...store.drawer.data,
+                    open: false
+                });
+            }
         },
         {
             label: "Danh sách đơn hàng",
-            icon: <Order className="icon" />
+            icon: <Order className="icon" />,
+            onClick() {
+
+            }
         },
     ]
     return (
         <div className="setting">
             {listSetting.map((item, idx) => {
-                return <div key={idx} className="itemSetting">{item.icon} {item.label}</div>
+                return <div key={idx} className="itemSetting" onClick={item.onClick}>{item.icon} {item.label}</div>
             })}
             <button className="btnLogout" onClick={() => {
                 store.modal.handleModal({

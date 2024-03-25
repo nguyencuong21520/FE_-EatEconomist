@@ -1,0 +1,46 @@
+.personanlInformation {
+    padding: 1.2rem;
+    background-color: white;
+    border-radius: 1.8rem;
+
+    .avatar {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+        background-color: white;
+        border: 1px solid black;
+        padding: 1.8rem;
+    }
+
+    .displayName {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.8rem;
+
+        label {
+            font-size: 2.6rem;
+            font-weight: bold;
+        }
+    }
+
+    .formItem {
+        margin-bottom: 1.8rem;
+    }
+
+    .tabInformation {
+        .ant-tabs-nav-wrap {
+            justify-content: center;
+        }
+
+    }
+}
+
+.personal {
+    .groupBtn {
+        margin-top: 1.8rem;
+        display: flex;
+        justify-content: flex-end;
+        gap: 1.8rem;
+    }
+}

@@ -108,3 +108,14 @@
         margin: auto;
     }
 }
+
+.titleCreateBill {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+
+    img {
+        width: 5rem;
+        height: 5rem;
+    }
+}

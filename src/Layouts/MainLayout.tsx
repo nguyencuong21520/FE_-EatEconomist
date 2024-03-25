@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { Outlet } from 'react-router-dom';
-import { ArrowRightOutlined } from '@ant-design/icons';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { ArrowDownOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { StoreContext } from '../../store/ProviderStore';
 import Home from '../Components/Icons/Home';
 import ArrowDouble from '../Components/Icons/ArrowDouble';
@@ -10,11 +10,13 @@ import Header from '../Components/Header';
 import IconSetting from '../Components/Icons/Setting';
 import TitleDrawer from '../Components/Drawer/TitleDrawer';
 import Setting from '../Components/Setting';
+import CreateBill from '../Components/CreateBill';
 import './layout.scss';
 
 const MainLayout = () => {
     const store = useContext(StoreContext);
-    const handleDrawer = (type: "SETTING") => {
+    const nav = useNavigate();
+    const handleDrawer = (type: "SETTING" | "CREATE_BILL" | "HOME") => {
         switch (type) {
             case "SETTING":
                 store.drawer.handleDrawer({
@@ -23,8 +25,24 @@ const MainLayout = () => {
                     title: <TitleDrawer />,
                     children: <Setting />,
                     closeIcon: <ArrowRightOutlined />,
-                    rootClassName: "settingDrawer"
+                    rootClassName: "settingDrawer",
+                    placement: "right",
+                    size: "default"
                 });
+                break;
+            case "CREATE_BILL":
+                store.drawer.handleDrawer({
+                    open: true,
+                    title: <div className="titleCreateBill"><img src="https://media.istockphoto.com/id/1038355632/vector/hamburger-icon.jpg?s=612x612&w=0&k=20&c=0lwYqfJxkss5KKmDPAFZRJ9_2-z3h1tRAfFyAKpVEYU=" alt="" /> Lên đơn nào!</div>,
+                    children: <CreateBill />,
+                    closeIcon: <ArrowDownOutlined />,
+                    rootClassName: "createBillDrawer",
+                    placement: "bottom",
+                    size: "large"
+                });
+                break;
+            case "HOME":
+                nav("/home");
                 break;
             default:
                 break;
@@ -38,20 +56,20 @@ const MainLayout = () => {
             </div>
             <div className="menuBar">
                 <div className="groupMenu">
-                    <div className="divIcon">
+                    <div className="divIcon" onClick={() => handleDrawer("HOME")}>
                         <Home className="icon" />
                     </div>
                     <div className="divIcon">
                         <ArrowDouble className="icon" />
                     </div>
-                    <div className="divIcon iconCenter">
+                    <div className="divIcon iconCenter" onClick={() => handleDrawer("CREATE_BILL")}>
                         <Plus className="icon" />
                     </div>
                     <div className="divIcon">
                         <User className="icon" />
                     </div>
-                    <div className="divIcon">
-                        <IconSetting className="icon" onClick={() => handleDrawer("SETTING")} />
+                    <div className="divIcon" onClick={() => handleDrawer("SETTING")}>
+                        <IconSetting className="icon" />
                     </div>
                 </div>
             </div>

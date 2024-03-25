@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import Card from '../../Components/Card';
-import Bill from '../../Components/Bill';
+import Bill from '../../Components/BillCard';
 import CardFriend from '../../Components/CardFriend';
 import './styles.scss';
 
 const Home = () => {
     const [showMore, setShowMore] = useState<boolean>(false);
+    const nav = useNavigate();
     return (
         <div className="homeTab">
             <div className="cards">
@@ -16,7 +18,9 @@ const Home = () => {
             <div className="bills">
                 <p className="par">
                     <span className="title">Pending Bills</span>
-                    <span>View All</span>
+                    <span onClick={() => {
+                        nav('/list-order');
+                    }}>View All</span>
                 </p>
                 <div className="listBill">
                     <Bill />

@@ -1,0 +1,83 @@
+.listOrder {
+    display: flex;
+    flex-direction: column;
+
+    .filterBar {
+        margin: 1.8rem 0;
+        display: flex;
+        gap: 1.8rem;
+
+        .iconFilter {
+            fill: white;
+            width: 3rem;
+            height: 3rem;
+        }
+    }
+
+    .titleResult {
+        font-weight: bold;
+        font-size: 1.8rem;
+    }
+
+    .list {
+        overflow-y: scroll;
+        max-height: 80vh;
+        padding: 5.6rem 0;
+        padding-bottom: 6.8rem;
+
+        .parent {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-column-gap: 1.8rem;
+            grid-row-gap: 5.6rem;
+        }
+    }
+}
+
+.orderCard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.8rem;
+    width: 100%;
+    height: 15rem;
+    background-color: white;
+    font-weight: bold;
+    border-radius: 1.8rem;
+
+    img {
+        position: absolute;
+        top: -1.8rem;
+        width: 7rem;
+        height: 7rem;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 1.6rem;
+        box-shadow: rgba(149, 157, 165, 0.432) 0px 8px 24px;
+    }
+
+    .iconStatus {
+        position: absolute;
+
+        &.check {
+            background-color: #84f2c3b8;
+        }
+
+        &.unCheck {
+            background-color: #f66060;
+        }
+
+        border: none;
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        right: 0;
+        bottom: 0;
+
+        svg {
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+}

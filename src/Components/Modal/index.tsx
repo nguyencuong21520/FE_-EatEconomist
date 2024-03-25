@@ -7,6 +7,7 @@ const Modal = () => {
     const storeModal = store.modal;
     return (store.modal.data.open && <ModalComponent {...storeModal.data} onCancel={() => {
         store.modal.handleModal({
+            ...storeModal.data,
             open: false
         });
     }} />

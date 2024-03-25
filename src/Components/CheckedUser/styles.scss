@@ -1,0 +1,14 @@
+.itemUser {
+    .imgUser {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+    }
+}
+
+.checkedUser {
+    display: flex;
+    gap: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+}

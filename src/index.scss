@@ -40,14 +40,19 @@ html {
   box-sizing: border-box;
 
   &::-webkit-scrollbar {
-    height: 0.2rem;
-    width: 0.2rem;
+    height: 0rem;
+    width: 0rem;
     background-color: transparent;
   }
 
   &::-webkit-scrollbar-thumb {
     background-color: #b3223d;
     width: 0;
-    border-radius: 1rem;
+    border-radius: 0rem;
   }
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #b3223d !important;
+  border-color: #b3223d;
 }
