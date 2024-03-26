@@ -1,8 +1,22 @@
-import { Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { LoadingOutlined } from '@ant-design/icons';
 import logo from '../assets/logo.png';
+import './layout.scss';
 
 
 const AuthLayout = () => {
+    const [loading, setLoading] = useState<boolean>(true);
+    const nav = useNavigate();
+    useEffect(() => {
+        const accessToken = localStorage.getItem("access_token");
+        if (accessToken) {
+            nav('/');
+        } else {
+            setLoading(false);
+        }
+    }, []);
+    if (loading) return <div className="loadingAuth"><LoadingOutlined size={150} /></div>
     return (
         <div className="authLayout">
             <div className="headerAuth">

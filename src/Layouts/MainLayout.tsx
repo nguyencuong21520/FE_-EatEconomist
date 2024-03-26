@@ -42,7 +42,7 @@ const MainLayout = () => {
                 });
                 break;
             case "HOME":
-                nav("/home");
+                nav("/");
                 break;
             default:
                 break;

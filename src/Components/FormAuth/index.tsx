@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Button, Form, Input } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../../store/ProviderStore';
 import actionRequest from '../../../utils/restApi';
 import './styles.scss';
@@ -13,6 +13,7 @@ interface Props {
 const FormAuth = (props: Props) => {
     const store = useContext(StoreContext);
     const user = store.user;
+    const nav = useNavigate();
     const validationSchema = yup.object({
         email: yup.string().email("Email chưa đúng định dạng!").required("Bạn cần nhập email!"),
         ...props.form !== 'resetPassword' && { password: yup.string().required("Bạn cần nhập mật khẩu!") },
@@ -38,18 +39,31 @@ const FormAuth = (props: Props) => {
         },
         validationSchema,
         async onSubmit(values) {
+            user.handleUser({
+                ...user.data,
+                loading: true
+            });
             switch (props.form) {
                 case "login":
                     const logined = await actionRequest("/api/v1/auth/login", 'post', {
                         body: values
                     });
-                    console.log(logined);
+                    user.handleUser({
+                        ...logined.data,
+                        loading: false
+                    });
                     break;
                 default:
                     break;
             }
         }
     });
+    useEffect(() => {
+        if (user.data.token) {
+            localStorage.setItem("access_token", user.data.token as string);
+            nav('/');
+        }
+    }, [user.data]);
     return (
         <div className="formAuthPage">
             <Form
@@ -123,13 +137,13 @@ const FormAuth = (props: Props) => {
                     </Link>
                 </div>
                 }
-                <Button type="primary" htmlType="submit" className="btnSubmit">
+                <Button type="primary" loading={user.data.loading} disabled={user.data.loading} htmlType="submit" className="btnSubmit">
                     {props.form === "login" ? "Đăng nhập" : "Đăng ký"}
                 </Button>
                 <div className="redirectRegister">
                     <p className="forgotPass">Bạn {props.form === "login" ? "chưa có" : "đã có"} tài khoản?</p>
                     <Link to={props.form === "login" ? '/auth/register' : '/auth/login'}>
-                        <Button>{props.form === "login" ? "Đăng ký" : "Đăng nhập"}</Button>
+                        <Button loading={user.data.loading} disabled={user.data.loading}>{props.form === "login" ? "Đăng ký" : "Đăng nhập"}</Button>
                     </Link>
                 </div>
             </Form>

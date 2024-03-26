@@ -28,6 +28,7 @@ const ProviderStore = (props: Props) => {
     const [value, setValue] = useState<ContextStore>(intContext);
     const handleDrawer = createHandleState("drawer", "data", setValue);
     const handleModal = createHandleState("modal", "data", setValue);
+    const handleUser = createHandleState("user", "data", setValue);
     return (
         <StoreContext.Provider value={{
             ...value,
@@ -38,6 +39,10 @@ const ProviderStore = (props: Props) => {
             modal: {
                 ...value.modal,
                 handleModal: (modalOptions) => handleModal(modalOptions),
+            },
+            user: {
+                ...value.user,
+                handleUser: (user) => handleUser(user)
             }
         }}>
             {props.children}

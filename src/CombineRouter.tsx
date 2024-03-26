@@ -10,14 +10,15 @@ import Modal from './Components/Modal';
 import ResetPassword from './Pages/auth/reset-password';
 import ListOrder from './Pages/list-order';
 import PersonalInformation from './Components/PersonalInformation';
+import AuthProtect from './Layouts/AuthProtect';
 
 const CombineRouter = () => {
     return (
         <ProviderStore>
             <BrowserRouter>
                 <Routes>
-                    <Route path='/' element={<MainLayout />}>
-                        <Route path='home' element={<Home />} />
+                    <Route path='/' element={<AuthProtect><MainLayout /></AuthProtect>}>
+                        <Route path='' element={<Home />} />
                         <Route path='list-order' element={<ListOrder />} />
                         <Route path='personal-information' element={<PersonalInformation />} />
                     </Route>
