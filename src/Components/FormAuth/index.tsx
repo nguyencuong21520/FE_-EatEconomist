@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Button, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
+import { StoreContext } from '../../../store/ProviderStore';
+import actionRequest from '../../../utils/restApi';
 import './styles.scss';
 
 interface Props {
     form: "login" | 'register' | 'resetPassword';
 }
 const FormAuth = (props: Props) => {
+    const store = useContext(StoreContext);
+    const user = store.user;
     const validationSchema = yup.object({
         email: yup.string().email("Email chưa đúng định dạng!").required("Bạn cần nhập email!"),
         ...props.form !== 'resetPassword' && { password: yup.string().required("Bạn cần nhập mật khẩu!") },
@@ -33,8 +37,17 @@ const FormAuth = (props: Props) => {
             } : {}
         },
         validationSchema,
-        onSubmit(values) {
-            console.log(values);
+        async onSubmit(values) {
+            switch (props.form) {
+                case "login":
+                    const logined = await actionRequest("/api/v1/auth/login", 'post', {
+                        body: values
+                    });
+                    console.log(logined);
+                    break;
+                default:
+                    break;
+            }
         }
     });
     return (

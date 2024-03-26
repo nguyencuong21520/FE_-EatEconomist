@@ -1,5 +1,9 @@
-import { DrawerProps } from 'antd';
 import React from 'react';
+import { DrawerProps } from 'antd';
+import { AxiosHeaders, Method, RawAxiosRequestHeaders } from 'axios';
+type MethodsHeaders = Partial<{
+    [Key in Method as Lowercase<Key>]: AxiosHeaders;
+} & { common: AxiosHeaders }>;
 
 export interface CardData {
     bankname?: string;
@@ -13,8 +17,14 @@ export interface Obj {
 export interface Drawer extends DrawerProps {
     component?: React.ReactNode;
 }
-export interface Data {
-    data?: Obj;
+export interface Data extends Obj {
     success?: boolean;
     message?: string;
+    loading?: boolean;
+}
+export interface Query {
+    query?: Obj;
+    params?: string[];
+    body?: Obj;
+    headers?: (RawAxiosRequestHeaders & MethodsHeaders) | AxiosHeaders;
 }
