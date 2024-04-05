@@ -21,7 +21,7 @@
 
     .listOrder {
         margin-top: 1.2rem;
-        max-height: 30vh;
+        // max-height: 30vh;
         overflow: scroll;
     }
 
@@ -29,6 +29,10 @@
         width: 100%;
         margin: auto;
     }
+}
+
+.done-transition {
+    background-color: rgba(132, 242, 195, 0.7215686275) !important;
 }
 
 .order {

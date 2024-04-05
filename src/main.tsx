@@ -1,7 +1,10 @@
-import ReactDOM from 'react-dom/client';
-import CombineRouter from './CombineRouter.tsx';
-import './index.scss';
+import ReactDOM from "react-dom/client";
+import CombineRouter from "./CombineRouter.tsx";
+import ProviderStore from "../store/ProviderStore.tsx";
+import "./index.scss";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <CombineRouter />
-)
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <ProviderStore>
+    <CombineRouter />
+  </ProviderStore>
+);
