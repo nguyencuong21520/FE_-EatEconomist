@@ -8,6 +8,7 @@ import CreateBill from "../CreateBill";
 import "./styles.scss";
 import actionRequest from "../../../utils/restApi";
 import { Obj } from "../Global/interface";
+import ViewDetailTransaction from "../ViewDetailTransaction";
 
 const ListOrder = () => {
   const store = useContext(StoreContext);
@@ -16,7 +17,7 @@ const ListOrder = () => {
   const handleOpenDetailOrder = (item: Obj) => {
     drawer.handleDrawer({
       open: true,
-      children: <CreateBill data={item} isView />,
+      children: <ViewDetailTransaction data={item} />,
       title: "Detail đơn order",
       placement: "right",
       size: "default",
@@ -24,17 +25,20 @@ const ListOrder = () => {
   };
 
   const getTransaction = async () => {
-    const data = await actionRequest("api/v1/transaction/byUser", "get");
-    transaction.handleTransactions({
-      ...transaction.data,
-      ...data.data,
-      loading: false,
-    });
+    if (!Object.keys(transaction.data).length) {
+      const data = await actionRequest("api/v1/transaction/byUser", "get");
+      transaction.handleTransactions({
+        ...transaction.data,
+        ...data.data,
+        loading: false,
+      });
+    }
   };
 
   useEffect(() => {
     getTransaction();
   }, []);
+
   return (
     <div className="listOrder">
       <div className="filterBar">

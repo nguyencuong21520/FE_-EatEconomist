@@ -44,6 +44,11 @@ const intContext: ContextStore = {
         data: {},
         handleTransactionDetails:(transactionDetails) => {
         },
+    },
+    accountList : {
+        data: {},
+        handleAccountList:(accountList) => {
+        },
     }
 }
 

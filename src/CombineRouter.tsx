@@ -4,14 +4,15 @@ import Home from "./Pages/home";
 import Login from "./Pages/auth/login";
 import Register from "./Pages/auth/register";
 import MainLayout from "./Layouts/MainLayout";
-import { StoreContext } from "../store/ProviderStore";
+
 import Drawer from "./Components/Drawer";
 import Modal from "./Components/Modal";
 import ResetPassword from "./Pages/auth/reset-password";
 import ListOrder from "./Pages/list-order";
 import PersonalInformation from "./Components/PersonalInformation";
 import AuthProtect from "./Layouts/AuthProtect";
-import { useContext } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CombineRouter = () => {
   //   const store = useContext(StoreContext);
@@ -44,6 +45,7 @@ const CombineRouter = () => {
       {/* {drawer.open && } */}
       <Drawer />
       <Modal />
+      <ToastContainer />
     </BrowserRouter>
   );
 };

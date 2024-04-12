@@ -1,39 +1,44 @@
-import React from "react";
+import React, { useContext } from "react";
 import Tick from "../Icons/Tick";
 import "./styles.scss";
 import Close from "../Icons/Close";
 import { Obj } from "../Global/interface";
 import Time from "../Icons/Time";
 import { format } from "date-fns";
-import { formatMoney } from "../../../utils";
+import { StoreContext } from "../../../store/ProviderStore";
+import { formatMoney } from "../../../utils/index.ts";
 
 interface Props {
   data?: Obj;
 }
 
 const OrderCard = (props: Props) => {
+  const store = useContext(StoreContext);
+  const user = store.user;
+
+  const transactionDetailOfOwner = props.data?.transactionDetailAffterMap.find(
+    (item: Obj) => item.user?._id === user.data._id
+  );
+
   return (
     <div className="orderCard">
-      <img
-        src="https://media.istockphoto.com/id/1038355632/vector/hamburger-icon.jpg?s=612x612&w=0&k=20&c=0lwYqfJxkss5KKmDPAFZRJ9_2-z3h1tRAfFyAKpVEYU="
-        alt=""
-      />
-      <h2 className="title">{props.data?.name}</h2>
-      <p className="price">
-        Tổng:{" "}
-        {props.data?.moneyDetail * props.data?.amount &&
-          formatMoney(props.data?.moneyDetail * props.data?.amount)}
-      </p>
+      <img src={props.data?.owner.avatar} alt="" />
+      <h2>
+        {transactionDetailOfOwner?.debitAmount &&
+          formatMoney(transactionDetailOfOwner?.debitAmount)}
+      </h2>
+      <h2 className="title">{props.data?.description}</h2>
+      <p className="price">Chủ đơn: {props.data?.owner.fullName}</p>
       <p className="time">
-        <Time style={{ width: "30px", height: "30px" }} />{" "}
+        <Time style={{ width: "25px", height: "25px" }} />{" "}
         {format(new Date(props.data?.createdAt), "dd/MM/yyyy")}
       </p>
       <button
         className={`iconStatus ${
-          props.data?.status == "done" ? "check" : "unCheck"
+          transactionDetailOfOwner?.status == "done" ? "check" : "unCheck"
         }`}
       >
-        {props.data?.status == "done" ? <Tick /> : <Close />}
+        {transactionDetailOfOwner?.status == "done" ? <Tick /> : <Close />}
       </button>
     </div>
   );

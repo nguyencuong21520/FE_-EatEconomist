@@ -24,6 +24,10 @@ export interface ContextStore {
     data: Data;
     handleTransactionDetails: (transactionDetails?: Data) => void;
   };
+  accountList: {
+    data: Data;
+    handleAccountList: (accountList?: Data) => void;
+  };
 }
 
 interface Props {
@@ -46,6 +50,7 @@ const ProviderStore = (props: Props) => {
     "data",
     setValue
   );
+  const handleAccountList = createHandleState("accountList", "data", setValue);
   return (
     <StoreContext.Provider
       value={{
@@ -71,6 +76,10 @@ const ProviderStore = (props: Props) => {
           ...value.transactionDetails,
           handleTransactionDetails: (transactionDetails) =>
             handleTransactionDetails(transactionDetails),
+        },
+        accountList: {
+          ...value.accountList,
+          handleAccountList: (accountList) => handleAccountList(accountList),
         },
       }}
     >

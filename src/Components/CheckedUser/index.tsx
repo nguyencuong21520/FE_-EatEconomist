@@ -1,42 +1,74 @@
-import React from 'react';
-import { Checkbox } from 'antd';
-import './styles.scss';
+import React, { useContext, useEffect } from "react";
+import { Checkbox } from "antd";
+import "./styles.scss";
+import actionRequest from "../../../utils/restApi";
+import { StoreContext } from "../../../store/ProviderStore";
+import { Obj } from "../Global/interface";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Order as InterfaceOrder } from "../CreateBill/index";
 
 interface Props {
-
+  handleChange?: (index?: number, data?: InterfaceOrder) => void;
+  index?: number;
+  data?: InterfaceOrder;
 }
 const CheckedUser = (props: Props) => {
-    const listUser = [
-        {
-            id: 1,
-            userName: "NV.A"
-        },
-        {
-            id: 2,
-            userName: "NV.A"
-        },
-        {
-            id: 3,
-            userName: "NV.A"
-        },
-        {
-            id: 4,
-            userName: "NV.A"
-        },
-    ]
-    return (
-        <div className="checkedUser">
-            <Checkbox.Group>
-                {listUser.map((item) => {
-                    return <div className="itemUser" key={item.id}>
-                        <img src="https://res.cloudinary.com/dxo374ch8/image/upload/v1710487616/blob14e91f66-faeb-40cb-aeda-49f10b1f7ac8.webp" alt="" className="imgUser" />
-                        <p>NV.A</p>
-                        <Checkbox value={item.id} />
-                    </div>
-                })}
-            </Checkbox.Group>
-        </div>
-    )
-}
+  const store = useContext(StoreContext);
+  const accountList = store.accountList;
+
+  const getAccountList = async () => {
+    if (!Object.keys(accountList.data).length) {
+      try {
+        accountList.handleAccountList({
+          ...accountList.data,
+          loading: true,
+        });
+        const data = await actionRequest("api/v1/auth/user-list", "get");
+        if (data) {
+          accountList.handleAccountList({
+            ...accountList,
+            data: data.data?.data,
+            loading: false,
+          });
+        }
+      } catch (error) {
+        console.log("error", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getAccountList();
+  }, []);
+  return (
+    <div className="checkedUser">
+      <Checkbox.Group>
+        {accountList.data?.loading ? (
+          <LoadingOutlined />
+        ) : (
+          accountList.data?.data &&
+          accountList.data?.data.map((item: Obj) => {
+            return (
+              <div className="itemUser" key={item._id}>
+                <img src={item.avatar} alt="" className="imgUser" />
+                <p>{item.fullName}</p>
+                <Checkbox
+                  value={item._id}
+                  onChange={(e) => {
+                    const newData: InterfaceOrder = {
+                      ...(props.data as InterfaceOrder),
+                      user: e.target.value,
+                    };
+                    props.handleChange?.(props.index, newData);
+                  }}
+                />
+              </div>
+            );
+          })
+        )}
+      </Checkbox.Group>
+    </div>
+  );
+};
 
 export default CheckedUser;

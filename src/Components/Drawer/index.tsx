@@ -7,6 +7,7 @@ const Drawer = () => {
   const storeDrawer = store.drawer;
   return (
     <DrawerComponent
+      style={{ height: "850px" }}
       {...storeDrawer.data}
       onClose={() => {
         storeDrawer.handleDrawer({
@@ -16,7 +17,7 @@ const Drawer = () => {
       }}
       destroyOnClose={!storeDrawer.data.open}
     >
-      {storeDrawer.data.children}
+      {storeDrawer.data.open && storeDrawer.data.children}
     </DrawerComponent>
   );
 };

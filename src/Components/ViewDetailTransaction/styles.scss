@@ -1,0 +1,93 @@
+.info-wrapper{
+    h1{
+        text-align: center;
+        margin-bottom: 5px;
+        font-size: 18px;
+    }
+    p{
+        text-align: center;
+        margin-bottom: 10px;
+    }
+   .group-member{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+   }
+          .owner {
+              margin-bottom: 10px;
+          }
+
+}
+.listOrder{
+    max-height: 65vh;
+    overflow-y: scroll;
+    margin: 8px 0px;
+}
+
+.done-transaction {
+    background-color: #f6ffed !important;
+    border: 1px solid #b7eb8f;
+}
+
+.transactionDetail{
+    padding: 10px;
+    margin: 10px 0px;
+    background-color: rgba(250, 209, 209, 0.5490196078);
+    border-radius: 10px;
+
+
+    .top{
+    display: flex;
+    }
+
+    .info  > *{
+        margin: 3px 0px;
+    }
+    .info{
+        margin-left: 8px;
+    }
+
+    .owner{
+        max-width: 30%;
+        text-align: center;
+        .avatar img{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+        }
+    }
+    .price{
+        display: flex;
+        gap: 10px;
+    }
+
+    .bottom{
+
+        .success-button {
+                background-color: #52c41a;
+                /* Màu xanh thành công */
+                border-color: #52c41a;
+                /* Màu viền tương ứng */
+                color: #fff;
+                /* Màu chữ trắng */
+                float: right;
+                margin-right: 15px;
+            }
+    }
+
+
+
+}
+
+        .payment-info {
+            border-top: 1px solid black;
+            padding-top: 8px;
+
+            .line{
+                width: 150px;
+                height: 1px;
+                background-color: pink;
+                margin: 5px 0px;
+            }
+        }
