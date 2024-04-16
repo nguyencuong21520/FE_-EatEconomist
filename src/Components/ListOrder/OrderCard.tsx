@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Tick from "../Icons/Tick";
 import "./styles.scss";
 import Close from "../Icons/Close";

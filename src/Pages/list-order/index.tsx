@@ -1,10 +1,7 @@
-import React from 'react';
-import ListOrderComponent from '../../Components/ListOrder';
+import ListOrderComponent from "../../Components/ListOrder";
 
 const ListOrder = () => {
-    return (
-        <ListOrderComponent />
-    )
-}
+  return <ListOrderComponent />;
+};
 
 export default ListOrder;

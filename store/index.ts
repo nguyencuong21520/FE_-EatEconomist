@@ -1,4 +1,4 @@
-import { Obj } from "../src/Global/interface";
+
 import { ContextStore } from "./ProviderStore";
 
 const createHandleState = (keyStore: keyof ContextStore, keyUpdate: string, setState: React.Dispatch<React.SetStateAction<ContextStore>>) => {
@@ -19,11 +19,11 @@ const intContext: ContextStore = {
         data: {
             open: false,
         },
-        handleDrawer: (propsDrawer) => { }
+        handleDrawer: () => { }
     },
     user: {
         data: {},
-        handleUser:(user) => {
+        handleUser:() => {
 
         },
     },
@@ -31,23 +31,23 @@ const intContext: ContextStore = {
         data: {
             open: false,
         },
-        handleModal:(modalOptions) =>{
+        handleModal:() =>{
 
         },
     },
     transactions: {
         data : {},
-        handleTransactions:(transactions)=> {
+        handleTransactions:()=> {
         },
     },
     transactionDetails:{
         data: {},
-        handleTransactionDetails:(transactionDetails) => {
+        handleTransactionDetails:() => {
         },
     },
     accountList : {
         data: {},
-        handleAccountList:(accountList) => {
+        handleAccountList:() => {
         },
     }
 }

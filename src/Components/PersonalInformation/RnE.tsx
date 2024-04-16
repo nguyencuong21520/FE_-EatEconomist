@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import Form from "antd/es/form/Form";
 import { Button, Input } from "antd";
 import "./styles.scss";

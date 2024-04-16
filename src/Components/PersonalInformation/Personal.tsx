@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Form } from "react-bootstrap";
 import { Button, GetProp, Input, Upload, UploadProps, message } from "antd";
 import { useFormik } from "formik";
@@ -88,7 +88,7 @@ const Personal = () => {
     },
   });
 
-  const { handleSubmit, handleChange, errors, setFieldValue, values } = formMik;
+  const { handleSubmit, setFieldValue, values } = formMik;
   return (
     <div className="personal">
       <Form>
@@ -160,7 +160,12 @@ const Personal = () => {
           </Upload>
         </Form.Group>
         <div className="groupBtn">
-          <Button size="small" onClick={handleSubmit}>
+          <Button
+            size="small"
+            onClick={() => {
+              handleSubmit();
+            }}
+          >
             {user.data?.loading ? <LoadingOutlined /> : "Cập nhật"}
           </Button>
           <Button size="small">Reset</Button>

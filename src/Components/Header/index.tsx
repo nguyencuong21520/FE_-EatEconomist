@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import logo from "../../assets/logo.png";
 import "./styles.scss";
 import { useNavigate } from "react-router-dom";
 import { StoreContext } from "../../../store/ProviderStore";
 
-interface Props {
-  className?: string;
-}
-const Header = (props: Props) => {
+const Header = () => {
   const store = useContext(StoreContext);
   const user = store.user;
 
