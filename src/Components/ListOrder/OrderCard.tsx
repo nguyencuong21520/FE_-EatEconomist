@@ -30,7 +30,7 @@ const OrderCard = (props: Props) => {
       <h2 className="title">{props.data?.description}</h2>
       <p className="price">Chủ đơn: {props.data?.owner.fullName}</p>
       <p className="time">
-        <Time style={{ width: "25px", height: "25px" }} />{" "}
+        <Time style={{ width: "18px", height: "18px" }} />{" "}
         {format(new Date(props.data?.createdAt), "dd/MM/yyyy")}
       </p>
       <button
