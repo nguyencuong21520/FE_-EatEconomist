@@ -7,7 +7,6 @@ const Drawer = () => {
   const storeDrawer = store.drawer;
   return (
     <DrawerComponent
-      style={{ height: "100vh" }}
       {...storeDrawer.data}
       onClose={() => {
         storeDrawer.handleDrawer({
