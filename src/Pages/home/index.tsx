@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { DownOutlined, LoadingOutlined, UpOutlined } from "@ant-design/icons";
 import Card from "../../Components/Card";
 import Bill from "../../Components/BillCard";
 import CardFriend from "../../Components/CardFriend";
@@ -20,6 +20,10 @@ const Home = () => {
 
   const getTransaction = async () => {
     if (!Object.keys(transaction.data).length) {
+      transaction.handleTransactions({
+        ...transaction.data,
+        loading: true,
+      });
       const data = await actionRequest("api/v1/transaction/byUser", "get");
       transaction.handleTransactions({
         ...transaction.data,
@@ -28,6 +32,7 @@ const Home = () => {
       });
     }
   };
+  const getBudget = async () => {};
 
   const handleOpenDetailOrder = (item: Obj) => {
     drawer.handleDrawer({
@@ -45,8 +50,16 @@ const Home = () => {
   return (
     <div className="homeTab">
       <div className="cards">
-        <Card className="itemCard" />
-        <Card className="itemCard" />
+        <Card
+          content="Debit"
+          totals={user.data?.amountDebit}
+          className="itemCard"
+        />
+        <Card
+          content="Budget"
+          totals={user.data?.budget}
+          className="itemCard"
+        />
       </div>
       <div className="bills">
         <p className="par">
@@ -60,7 +73,12 @@ const Home = () => {
           </span>
         </p>
         <div className="listBill">
-          {!transaction.data?.loading &&
+          {transaction.data?.loading ? (
+            <div>
+              <LoadingOutlined />
+            </div>
+          ) : (
+            transaction.data?.transaction &&
             transaction.data?.transaction?.slice(0, 4).map((tran: Obj) => {
               return (
                 <div
@@ -72,7 +90,8 @@ const Home = () => {
                   <Bill data={tran} user={user} />
                 </div>
               );
-            })}
+            })
+          )}
         </div>
       </div>
       {/* <div className={`friends ${showMore ? "show" : ""}`}>

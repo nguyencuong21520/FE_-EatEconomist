@@ -18,28 +18,29 @@ const TransactionDetail = (props: Props) => {
   const [loading, setLoading] = useState(false);
   const store = useContext(StoreContext);
   const transaction = store.transactions;
+  const drawer = store.drawer;
   const data = props.data;
 
-  const updateTransactionDetailAffterMap = (
-    transaction: Obj[],
-    transactionDetailUpdate: Obj
-  ) => {
-    const transactionDetailAffterMap = transaction.map((item: Obj) => {
-      return {
-        ...item,
-        transactionDetailAffterMap: item.transactionDetailAffterMap?.map(
-          (tran: Obj) => {
-            if (tran._id === transactionDetailUpdate._id) {
-              return transactionDetailUpdate;
-            } else {
-              return tran;
-            }
-          }
-        ),
-      };
-    });
-    return transactionDetailAffterMap;
-  };
+  // const updateTransactionDetailAffterMap = (
+  //   transaction: Obj[],
+  //   transactionDetailUpdate: Obj
+  // ) => {
+  //   const transactionDetailAffterMap = transaction.map((item: Obj) => {
+  //     return {
+  //       ...item,
+  //       transactionDetailAffterMap: item.transactionDetailAffterMap?.map(
+  //         (tran: Obj) => {
+  //           if (tran._id === transactionDetailUpdate._id) {
+  //             return transactionDetailUpdate;
+  //           } else {
+  //             return tran;
+  //           }
+  //         }
+  //       ),
+  //     };
+  //   });
+  //   return transactionDetailAffterMap;
+  // };
 
   const handleChangeStatus = () => {
     setLoading(true);
@@ -62,15 +63,15 @@ const TransactionDetail = (props: Props) => {
       );
       if (updateRespon.status === 200) {
         toast.success("Cập nhật thành công");
-        const newData = updateTransactionDetailAffterMap(
-          transaction.data?.transaction,
-          updateRespon?.data?.transactionDetail
-        );
-
+        const data = await actionRequest("api/v1/transaction/byUser", "get");
         transaction.handleTransactions({
           ...transaction.data,
-          transaction: newData,
+          ...data.data,
           loading: false,
+        });
+        drawer.handleDrawer({
+          ...drawer.data,
+          open: false,
         });
       }
     } catch (error) {

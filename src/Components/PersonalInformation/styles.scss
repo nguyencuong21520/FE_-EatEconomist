@@ -9,7 +9,7 @@
         border-radius: 50%;
         background-color: white;
         border: 1px solid black;
-        padding: 1.8rem;
+        // padding: 1.8rem;
     }
 
     .displayName {
@@ -43,4 +43,10 @@
         justify-content: flex-end;
         gap: 1.8rem;
     }
+}
+.groupBtn {
+    margin-top: 1.8rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.8rem;
 }

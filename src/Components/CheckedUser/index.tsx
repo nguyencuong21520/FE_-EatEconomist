@@ -16,6 +16,13 @@ const CheckedUser = (props: Props) => {
   const store = useContext(StoreContext);
   const accountList = store.accountList;
 
+  const getInitials = (str: string) => {
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0))
+      .join("");
+  };
+
   const getAccountList = async () => {
     if (!Object.keys(accountList.data).length) {
       try {
@@ -51,7 +58,7 @@ const CheckedUser = (props: Props) => {
             return (
               <div className="itemUser" key={item._id}>
                 <img src={item.avatar} alt="" className="imgUser" />
-                <p>{item.fullName}</p>
+                <p>{item.fullName && getInitials(item.fullName)}</p>
                 <Checkbox
                   value={item._id}
                   onChange={(e) => {

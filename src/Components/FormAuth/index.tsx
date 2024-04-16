@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../../store/ProviderStore";
 import actionRequest from "../../../utils/restApi";
 import "./styles.scss";
+import { toast } from "react-toastify";
 
 interface Props {
   form: "login" | "register" | "resetPassword";
@@ -15,10 +16,7 @@ const FormAuth = (props: Props) => {
   const user = store.user;
   const nav = useNavigate();
   const validationSchema = yup.object({
-    email: yup
-      .string()
-      .email("Email chưa đúng định dạng!")
-      .required("Bạn cần nhập email!"),
+    email: yup.string().required("Bạn cần nhập email!"),
     ...(props.form !== "resetPassword" && {
       password: yup.string().required("Bạn cần nhập mật khẩu!"),
     }),
@@ -78,6 +76,9 @@ const FormAuth = (props: Props) => {
             ...register.data,
             loading: false,
           });
+          if (register.status == 201) {
+            toast.success("Đăng ký tài khoản thành công");
+          }
           break;
         case "resetPassword":
         default:

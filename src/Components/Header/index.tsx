@@ -26,7 +26,12 @@ const Header = (props: Props) => {
         </div>
         <h1>14X</h1>
       </div>
-      <div className="user">
+      <div
+        className="user"
+        onClick={() => {
+          nav("/personal-information");
+        }}
+      >
         <img src={user.data?.avatar} alt="" />
       </div>
     </div>

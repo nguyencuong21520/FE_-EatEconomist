@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./styles.scss";
+import copyIcon from "../../assets/copy-two-paper-sheets-interface-symbol.png";
 import { Obj } from "../Global/interface";
-import { Avatar, Alert, Button } from "antd";
+import { Avatar, Alert, Button, Modal, message } from "antd";
 import { format } from "date-fns";
 import TransactionDetail from "./TransactionDetail";
 import { formatMoney } from "../../../utils/index.ts";
@@ -15,6 +16,54 @@ const ViewDetailTransaction = (props: Props) => {
   const store = useContext(StoreContext);
   const user = store.user;
   const data = props.data;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [copied, setCopied] = useState({
+    bankName: false,
+    bankNumber: false,
+  });
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCopy = (text: string, type: string) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setCopied((prev) => {
+          return {
+            ...prev,
+            [type]: true,
+          };
+        });
+        message.success("Đã copy vào clipboard");
+      })
+      .catch((error) => {
+        setCopied((prev) => {
+          return {
+            ...prev,
+            [type]: false,
+          };
+        });
+        message.error("Copy Lỗi");
+      });
+    setTimeout(() => {
+      setCopied((prev) => {
+        return {
+          ...prev,
+          [type]: false,
+        };
+      });
+    }, 3000);
+  };
 
   const currentTransaction = data?.transactionDetailAffterMap.find(
     (item: Obj) => item.user?._id === user.data._id
@@ -50,7 +99,7 @@ const ViewDetailTransaction = (props: Props) => {
             type="warning"
             showIcon
             action={
-              <Button size="small" type="primary">
+              <Button size="small" type="primary" onClick={showModal}>
                 Thanh toán
               </Button>
             }
@@ -73,6 +122,50 @@ const ViewDetailTransaction = (props: Props) => {
         <div className="line"></div>
         <h2>{formatMoney(data?.amount - data?.discount)}</h2>
       </div>
+      <Modal
+        title="Thông tin thanh toán"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <div className="payment-info-wrapper">
+          <div className="qr">
+            <img src={user.data?.qr} alt="" />
+          </div>
+          <div className="bank-info">
+            <h3>{user.data.fullName}</h3>
+            <div>
+              {" "}
+              <p>
+                {user.data.bankNumber}{" "}
+                <img
+                  onClick={() => {
+                    handleCopy(user.data.bankNumber, "bankNumber");
+                  }}
+                  src={copyIcon}
+                  alt=""
+                />
+              </p>
+              {copied.bankNumber && <span>Đã copy </span>}
+            </div>
+
+            <div>
+              {" "}
+              <p>
+                {user.data.bankName}{" "}
+                <img
+                  onClick={() => {
+                    handleCopy(user.data.bankName, "bankName");
+                  }}
+                  src={copyIcon}
+                  alt=""
+                />
+              </p>
+              {copied.bankName && <span>Đã copy </span>}
+            </div>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };

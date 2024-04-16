@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import { formatMoney } from "../../../utils";
 import actionRequest from "../../../utils/restApi";
 import { toast } from "react-toastify";
+import { StoreContext } from "../../../store/ProviderStore";
 
 interface Props {
   isView?: boolean;
@@ -21,6 +22,9 @@ export interface Order {
   amount: number;
 }
 const CreateBill = (props: Props) => {
+  const store = useContext(StoreContext);
+  const [loading, setLoading] = useState(false);
+  const transaction = store.transactions;
   const [amountMoney, setAmountMoney] = useState(0);
 
   const { values, handleSubmit, setFieldValue } = useFormik({
@@ -35,6 +39,7 @@ const CreateBill = (props: Props) => {
     },
     async onSubmit(values) {
       try {
+        setLoading(true);
         const createRespon = await actionRequest(
           "api/v1/transaction/create",
           "post",
@@ -42,11 +47,19 @@ const CreateBill = (props: Props) => {
             body: values,
           }
         );
-        if (createRespon.status == 200) {
+        if (createRespon.status == 201) {
           toast.success("Tạo đơn thành công");
+          const data = await actionRequest("api/v1/transaction/byUser", "get");
+          transaction.handleTransactions({
+            ...transaction.data,
+            ...data.data,
+            loading: false,
+          });
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     },
   });
@@ -166,7 +179,7 @@ const CreateBill = (props: Props) => {
           disabled={!values.transactionDetail.length}
           htmlType="submit"
         >
-          Lên đơn
+          {loading ? <LoadingOutlined /> : "Lên đơn"}
         </Button>
       </>
     </Form>
