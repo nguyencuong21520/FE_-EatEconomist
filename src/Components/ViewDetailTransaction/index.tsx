@@ -69,6 +69,8 @@ const ViewDetailTransaction = (props: Props) => {
     (item: Obj) => item.user?._id === user.data._id
   );
 
+  console.log(data);
+
   return (
     <>
       <div className="info-wrapper">
@@ -130,14 +132,14 @@ const ViewDetailTransaction = (props: Props) => {
       >
         <div className="payment-info-wrapper">
           <div className="qr">
-            <img src={user.data?.qr} alt="" />
+            <img src={data?.owner?.qr} alt="" />
           </div>
           <div className="bank-info">
-            <h3>{user.data.fullName}</h3>
+            <h3>{data?.owner?.fullName}</h3>
             <div>
               {" "}
               <p>
-                {user.data.bankNumber}{" "}
+                {data?.owner?.bankNumber}{" "}
                 <img
                   onClick={() => {
                     handleCopy(user.data.bankNumber, "bankNumber");
