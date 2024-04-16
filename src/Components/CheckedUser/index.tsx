@@ -9,6 +9,7 @@ import { Order as InterfaceOrder } from "../CreateBill/index";
 
 interface Props {
   handleChange?: (index?: number, data?: InterfaceOrder) => void;
+  handleUserPicked: (avatar: string, fullName: string) => void;
   index?: number;
   data?: InterfaceOrder;
 }
@@ -60,13 +61,17 @@ const CheckedUser = (props: Props) => {
                 <img src={item.avatar} alt="" className="imgUser" />
                 <p>{item.fullName && getInitials(item.fullName)}</p>
                 <Checkbox
-                  value={item._id}
+                  value={item}
                   onChange={(e) => {
                     const newData: InterfaceOrder = {
                       ...(props.data as InterfaceOrder),
-                      user: e.target.value,
+                      user: e.target.value._id,
                     };
                     props.handleChange?.(props.index, newData);
+                    props.handleUserPicked(
+                      e.target.value.avatar,
+                      e.target.value.fullName
+                    );
                   }}
                 />
               </div>

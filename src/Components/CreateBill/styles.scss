@@ -96,3 +96,19 @@
         height: 90vh;
     }
 }
+
+.userEnrolled{
+    display: flex;
+    align-items: center;
+
+    .user-picked{
+        display: flex;
+        align-items: center;
+        margin-left: 13px;
+        img{
+            width: 30px;
+            height: 30px;
+            margin-right: 7px;
+        }
+    }
+}

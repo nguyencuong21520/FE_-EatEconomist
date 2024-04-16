@@ -8,6 +8,7 @@ import { formatMoney } from "../../../utils";
 import actionRequest from "../../../utils/restApi";
 import { toast } from "react-toastify";
 import { StoreContext } from "../../../store/ProviderStore";
+import moment from "moment";
 
 export interface Order {
   user: string;
@@ -101,6 +102,7 @@ const CreateBill = () => {
             onChange={(e) => {
               setFieldValue("date", e);
             }}
+            defaultValue={moment()}
             picker="week"
           />
         </Form.Item>
@@ -160,6 +162,7 @@ const CreateBill = () => {
         <Input
           type="number"
           className="input"
+          defaultValue={0}
           onChange={(e) => {
             setFieldValue("discount", Number(e.target.value));
           }}

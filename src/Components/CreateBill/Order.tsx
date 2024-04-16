@@ -3,6 +3,7 @@ import { EditOutlined, MinusCircleFilled } from "@ant-design/icons";
 import CheckedUser from "../CheckedUser";
 import "./styles.scss";
 import { Order as InterfaceOrder } from "./index.tsx";
+import { useState } from "react";
 interface Props {
   handleDeleteOrder?: () => void;
   isView?: boolean;
@@ -11,6 +12,11 @@ interface Props {
   handleChange?: (index?: number, data?: InterfaceOrder) => void;
 }
 const Order = (props: Props) => {
+  const [userPicked, setUserPicked] = useState({ avatar: "", fullName: "" });
+
+  const handleUserPicked = (avatar: string, fullName: string) => {
+    setUserPicked({ avatar: avatar, fullName: fullName });
+  };
   return (
     <div className={`order`}>
       <>
@@ -58,6 +64,7 @@ const Order = (props: Props) => {
                 type="number"
                 size="small"
                 className="price"
+                defaultValue={1}
                 onChange={(e) => {
                   const newData: InterfaceOrder = {
                     ...(props.data as InterfaceOrder),
@@ -79,12 +86,21 @@ const Order = (props: Props) => {
               handleChange={props.handleChange}
               index={props.index}
               data={props.data}
+              handleUserPicked={handleUserPicked}
             />
           }
           trigger={["click"]}
         >
           <EditOutlined />
         </Popover>
+        <div className="user-picked">
+          {userPicked.avatar && (
+            <>
+              <img src={userPicked.avatar} alt="" />{" "}
+              <span>{userPicked.fullName}</span>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
