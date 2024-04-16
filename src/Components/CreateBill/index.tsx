@@ -103,7 +103,6 @@ const CreateBill = () => {
               setFieldValue("date", e);
             }}
             defaultValue={moment()}
-            picker="week"
           />
         </Form.Item>
       </div>
