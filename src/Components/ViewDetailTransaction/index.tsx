@@ -142,7 +142,7 @@ const ViewDetailTransaction = (props: Props) => {
                 {data?.owner?.bankNumber}{" "}
                 <img
                   onClick={() => {
-                    handleCopy(user.data.bankNumber, "bankNumber");
+                    handleCopy(data?.owner?.bankNumber, "bankNumber");
                   }}
                   src={copyIcon}
                   alt=""
@@ -154,10 +154,10 @@ const ViewDetailTransaction = (props: Props) => {
             <div>
               {" "}
               <p>
-                {user.data.bankName}{" "}
+                {data?.owner?.bankName}{" "}
                 <img
                   onClick={() => {
-                    handleCopy(user.data.bankName, "bankName");
+                    handleCopy(data?.owner?.bankName, "bankName");
                   }}
                   src={copyIcon}
                   alt=""
