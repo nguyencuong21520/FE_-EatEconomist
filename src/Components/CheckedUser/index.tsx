@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Checkbox } from "antd";
 import "./styles.scss";
 import actionRequest from "../../../utils/restApi";

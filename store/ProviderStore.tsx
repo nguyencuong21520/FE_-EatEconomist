@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 import { ModalProps } from "antd";
-import { Data, Drawer, Obj } from "../src/Global/interface";
+import { Data, Drawer } from "../src/Global/interface";
 import { createHandleState, intContext } from ".";
 
 export interface ContextStore {

@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, DatePicker, Form, Input, Select } from "antd";
-import { Obj } from "../Global/interface";
 import Order from "./Order";
 import "./styles.scss";
 import { useFormik } from "formik";
@@ -10,10 +9,6 @@ import actionRequest from "../../../utils/restApi";
 import { toast } from "react-toastify";
 import { StoreContext } from "../../../store/ProviderStore";
 
-interface Props {
-  isView?: boolean;
-  data?: Obj;
-}
 export interface Order {
   user: string;
   moneyDetail: number;
@@ -21,7 +16,7 @@ export interface Order {
   name: string;
   amount: number;
 }
-const CreateBill = (props: Props) => {
+const CreateBill = () => {
   const store = useContext(StoreContext);
   const [loading, setLoading] = useState(false);
   const transaction = store.transactions;
@@ -138,7 +133,7 @@ const CreateBill = (props: Props) => {
                 ]);
               }}
               handleChange={(idx, transaction) => {
-                values.transactionDetail[Number(idx)] = transaction;
+                (values.transactionDetail[Number(idx)] as any) = transaction;
                 setFieldValue("transactionDetail", [
                   ...values.transactionDetail,
                 ]);

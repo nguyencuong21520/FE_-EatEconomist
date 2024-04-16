@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { DownOutlined, LoadingOutlined, UpOutlined } from "@ant-design/icons";
+import { LoadingOutlined } from "@ant-design/icons";
 import Card from "../../Components/Card";
 import Bill from "../../Components/BillCard";
-import CardFriend from "../../Components/CardFriend";
 import "./styles.scss";
 import actionRequest from "../../../utils/restApi";
 import { StoreContext } from "../../../store/ProviderStore";
@@ -11,7 +10,7 @@ import { Obj } from "../../Global/interface";
 import ViewDetailTransaction from "../../Components/ViewDetailTransaction";
 
 const Home = () => {
-  const [showMore, setShowMore] = useState<boolean>(false);
+  // const [showMore, setShowMore] = useState<boolean>(false);
   const store = useContext(StoreContext);
   const user = store.user;
   const drawer = store.drawer;
@@ -32,7 +31,6 @@ const Home = () => {
       });
     }
   };
-  const getBudget = async () => {};
 
   const handleOpenDetailOrder = (item: Obj) => {
     drawer.handleDrawer({

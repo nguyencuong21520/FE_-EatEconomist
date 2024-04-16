@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import "./styles.scss";
 import copyIcon from "../../assets/copy-two-paper-sheets-interface-symbol.png";
 import { Obj } from "../Global/interface";
@@ -46,7 +46,7 @@ const ViewDetailTransaction = (props: Props) => {
         });
         message.success("Đã copy vào clipboard");
       })
-      .catch((error) => {
+      .catch(() => {
         setCopied((prev) => {
           return {
             ...prev,

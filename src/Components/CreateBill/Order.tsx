@@ -1,4 +1,3 @@
-import React from "react";
 import { Input, Popover } from "antd";
 import { EditOutlined, MinusCircleFilled } from "@ant-design/icons";
 import CheckedUser from "../CheckedUser";
