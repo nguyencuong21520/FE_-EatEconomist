@@ -1,4 +1,3 @@
-import React from "react";
 import { Alert, Avatar } from "antd";
 import { Obj } from "../Global/interface";
 import "./styles.scss";

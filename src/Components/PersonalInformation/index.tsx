@@ -5,12 +5,7 @@ import RnE from "./RnE";
 import { StoreContext } from "../../../store/ProviderStore";
 import "./styles.scss";
 
-interface Props {}
-const onChange = (key: string) => {
-  console.log(key);
-};
-
-const PersonalInformation = (props: Props) => {
+const PersonalInformation = () => {
   const store = useContext(StoreContext);
   const user = store.user;
   const items: TabsProps["items"] = [
@@ -36,12 +31,7 @@ const PersonalInformation = (props: Props) => {
         <img src={user.data?.avatar} className="avatar" />
         <label>{user.data.fullName as string}</label>
       </div>
-      <Tabs
-        rootClassName="tabInformation"
-        defaultActiveKey="1"
-        items={items}
-        onChange={onChange}
-      />
+      <Tabs rootClassName="tabInformation" defaultActiveKey="1" items={items} />
     </div>
   );
 };

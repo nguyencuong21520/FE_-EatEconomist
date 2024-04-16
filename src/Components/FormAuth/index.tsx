@@ -64,7 +64,7 @@ const FormAuth = (props: Props) => {
           });
           break;
         case "register":
-          // eslint-disable-next-line no-case-declarations
+          //eslint-disable-next-line no-case-declarations
           const register = await actionRequest(
             "/api/v1/auth/register",
             "post",
@@ -77,7 +77,11 @@ const FormAuth = (props: Props) => {
             loading: false,
           });
           if (register.status == 201) {
-            toast.success("Đăng ký tài khoản thành công");
+            toast.success("Đăng ký tài khoản thành công", {
+              onClose: () => {
+                nav("/auth/login");
+              },
+            });
           }
           break;
         case "resetPassword":
