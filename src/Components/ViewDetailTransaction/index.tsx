@@ -132,14 +132,18 @@ const ViewDetailTransaction = (props: Props) => {
       >
         <div className="payment-info-wrapper">
           <div className="qr">
-            <img src={data?.owner?.qr} alt="" />
+            {data?.owner?.qr ? (
+              <img src={data?.owner?.qr} alt="" />
+            ) : (
+              "Chưa có mã QR"
+            )}
           </div>
           <div className="bank-info">
             <h3>{data?.owner?.fullName}</h3>
             <div>
               {" "}
               <p>
-                {data?.owner?.bankNumber}{" "}
+                {data?.owner?.bankNumber ?? "Chưa có số tài khoản"}{" "}
                 <img
                   onClick={() => {
                     handleCopy(data?.owner?.bankNumber, "bankNumber");
@@ -154,7 +158,7 @@ const ViewDetailTransaction = (props: Props) => {
             <div>
               {" "}
               <p>
-                {data?.owner?.bankName}{" "}
+                {data?.owner?.bankName ?? "Chưa có tên ngân hàng"}{" "}
                 <img
                   onClick={() => {
                     handleCopy(data?.owner?.bankName, "bankName");
