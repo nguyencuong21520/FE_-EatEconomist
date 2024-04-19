@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Input } from "antd";
 import { LoadingOutlined, SearchOutlined } from "@ant-design/icons";
 import { StoreContext } from "../../../store/ProviderStore";
@@ -11,8 +11,10 @@ import ViewDetailTransaction from "../ViewDetailTransaction";
 
 const ListOrder = () => {
   const store = useContext(StoreContext);
+  const [searchValue, setSearchValue] = useState("");
   const drawer = store.drawer;
   const transaction = store.transactions;
+
   const handleOpenDetailOrder = (item: Obj) => {
     drawer.handleDrawer({
       open: true,
@@ -41,7 +43,13 @@ const ListOrder = () => {
   return (
     <div className="listOrder">
       <div className="filterBar">
-        <Input prefix={<SearchOutlined />} />
+        <Input
+          prefix={<SearchOutlined />}
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+          }}
+          value={searchValue}
+        />
         <BarsFilter className="iconFilter" />
       </div>
       <p className="titleResult">
@@ -54,19 +62,25 @@ const ListOrder = () => {
       <div className="list">
         <div className="parent">
           {!transaction.data.loading &&
-            transaction.data?.transaction?.map((item: Obj) => {
-              return (
-                <div
-                  key={item._id}
-                  className={`itemCard`}
-                  onClick={() => {
-                    handleOpenDetailOrder(item);
-                  }}
-                >
-                  <OrderCard data={item} />
-                </div>
-              );
-            })}
+            (transaction?.data?.transaction as any[])
+              ?.filter((item: Obj) =>
+                item?.description
+                  .toLowerCase()
+                  .includes(searchValue.toLowerCase())
+              )
+              ?.map((item: Obj) => {
+                return (
+                  <div
+                    key={item._id}
+                    className={`itemCard`}
+                    onClick={() => {
+                      handleOpenDetailOrder(item);
+                    }}
+                  >
+                    <OrderCard data={item} />
+                  </div>
+                );
+              })}
         </div>
       </div>
     </div>
