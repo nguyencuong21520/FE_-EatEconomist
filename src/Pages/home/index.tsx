@@ -77,7 +77,7 @@ const Home = () => {
             </div>
           ) : (
             transaction.data?.transaction &&
-            transaction.data?.transaction?.slice(0, 4).map((tran: Obj) => {
+            transaction.data?.transaction?.slice(0, 10).map((tran: Obj) => {
               return (
                 <div
                   key={tran._id}
